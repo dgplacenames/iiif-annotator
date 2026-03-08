@@ -649,7 +649,7 @@
       const cos  = Math.cos(rad), sin = Math.sin(rad);
       vp.panBy(new OpenSeadragon.Point(
         (-dx*cos - dy*sin) / (cw * zoom),
-        (-dx*sin + dy*cos) / (cw * zoom)
+        (-dx*sin - dy*cos) / (cw * zoom)
       ), false);
     });
 
