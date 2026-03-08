@@ -367,6 +367,7 @@
       <button class="rot-step" onclick="stepMapRot(5)">▷</button>
       <button class="rot-step" onclick="setMapRot(0)" title="Reset rotation">↺</button>
     </div>
+    <button id="btn-invert" onclick="toggleInvert()">Invert</button>
     <input type="file" accept=".json" id="ann-upload" style="display:none"
            onchange="importAnnotations(event)">
     <button onclick="document.getElementById('ann-upload').click()">↑ Import</button>
@@ -1308,6 +1309,15 @@
       const g = parseInt(hex.slice(3,5), 16);
       const b = parseInt(hex.slice(5,7), 16);
       return `rgba(${r},${g},${b},${a})`;
+    }
+
+    let inverted = false;
+    function toggleInvert() {
+      inverted = !inverted;
+      osdEl.style.filter = inverted ? 'invert(1)' : '';
+      const btn = document.getElementById('btn-invert');
+      btn.style.color       = inverted ? 'var(--accent)' : '';
+      btn.style.borderColor = inverted ? 'var(--accent)' : '';
     }
 
     function doZoom(f)    { if (viewer) viewer.viewport.zoomBy(f, null, false); }
