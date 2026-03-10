@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,19 +9,25 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Lato:wght@300;400&display=swap');
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     :root {
-      --bg:     #f0f4f8;
-      --panel:  #ffffff;
+      --bg: #f0f4f8;
+      --panel: #ffffff;
       --border: #cbd5e0;
       --accent: #3182ce;
-      --green:  #276749;
-      --red:    #c53030;
-      --text:   #1a202c;
-      --muted:  #718096;
-      --mono:   'Fira Code', monospace;
-      --sans:   'Lato', sans-serif;
+      --green: #276749;
+      --red: #c53030;
+      --text: #1a202c;
+      --muted: #718096;
+      --mono: 'Fira Code', monospace;
+      --sans: 'Lato', sans-serif;
     }
 
     body {
@@ -44,6 +51,7 @@
       flex-shrink: 0;
       min-height: 46px;
     }
+
     .logo {
       font-family: var(--mono);
       font-size: 11px;
@@ -56,7 +64,13 @@
       padding: 3px 8px;
       border-radius: 2px;
     }
-    .url-row { flex: 1; display: flex; gap: 6px; }
+
+    .url-row {
+      flex: 1;
+      display: flex;
+      gap: 6px;
+    }
+
     .url-row input {
       flex: 1;
       background: var(--bg);
@@ -69,8 +83,14 @@
       outline: none;
       min-width: 0;
     }
-    .url-row input:focus { border-color: var(--accent); }
-    .url-row input::placeholder { color: var(--muted); }
+
+    .url-row input:focus {
+      border-color: var(--accent);
+    }
+
+    .url-row input::placeholder {
+      color: var(--muted);
+    }
 
     /* ── Buttons ── */
     button {
@@ -88,13 +108,40 @@
       transition: all .14s;
       white-space: nowrap;
     }
-    button:hover { border-color: var(--accent); color: var(--accent); }
-    button.accent { background: var(--accent); color: #fff; border-color: var(--accent); }
-    button.accent:hover { background: #2b6cb0; }
-    button.danger { color: var(--red); border-color: var(--red); }
-    button.danger:hover { background: var(--red); color: #fff; }
-    .upload-btn { cursor: pointer; }
-    .upload-btn:hover { border-color: var(--green); color: var(--green); }
+
+    button:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    button.accent {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+
+    button.accent:hover {
+      background: #2b6cb0;
+    }
+
+    button.danger {
+      color: var(--red);
+      border-color: var(--red);
+    }
+
+    button.danger:hover {
+      background: var(--red);
+      color: #fff;
+    }
+
+    .upload-btn {
+      cursor: pointer;
+    }
+
+    .upload-btn:hover {
+      border-color: var(--green);
+      color: var(--green);
+    }
 
     /* ── Rotation control ── */
     .rot-wrap {
@@ -106,6 +153,7 @@
       border-radius: 3px;
       padding: 2px 6px;
     }
+
     .rot-step {
       padding: 2px 6px;
       font-size: 11px;
@@ -113,9 +161,22 @@
       color: var(--muted);
       letter-spacing: 0;
     }
-    .rot-step:hover { color: var(--accent); }
-    .rot-display { display: flex; align-items: center; gap: 6px; }
-    .rot-display input[type=range] { width: 80px; accent-color: var(--accent); }
+
+    .rot-step:hover {
+      color: var(--accent);
+    }
+
+    .rot-display {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .rot-display input[type=range] {
+      width: 80px;
+      accent-color: var(--accent);
+    }
+
     .rot-num {
       font-family: var(--mono);
       font-size: 10px;
@@ -126,7 +187,11 @@
     }
 
     /* ── Workspace ── */
-    .workspace { display: flex; flex: 1; overflow: hidden; }
+    .workspace {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+    }
 
     /* ── Toolbar ── */
     .toolbar {
@@ -140,6 +205,7 @@
       gap: 3px;
       flex-shrink: 0;
     }
+
     .tool-btn {
       width: 34px;
       height: 34px;
@@ -158,21 +224,58 @@
       text-transform: none;
       font-family: inherit;
     }
-    .tool-btn:hover { color: var(--text); border-color: var(--border); }
-    .tool-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
-    .tool-sep { width: 22px; height: 1px; background: var(--border); margin: 3px 0; }
+
+    .tool-btn:hover {
+      color: var(--text);
+      border-color: var(--border);
+    }
+
+    .tool-btn.active {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+
+    .tool-sep {
+      width: 22px;
+      height: 1px;
+      background: var(--border);
+      margin: 3px 0;
+    }
 
     /* ── Viewer area ── */
-    #viewer-wrap { flex: 1; position: relative; background: #e2e8f0; overflow: hidden; }
-    #osd { width: 100%; height: 100%; }
-    #ann-svg { position: absolute; inset: 0; pointer-events: none; overflow: visible; }
-    #draw-canvas { position: absolute; inset: 0; display: none; cursor: crosshair; }
+    #viewer-wrap {
+      flex: 1;
+      position: relative;
+      background: #e2e8f0;
+      overflow: hidden;
+    }
+
+    #osd {
+      width: 100%;
+      height: 100%;
+    }
+
+    #ann-svg {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: visible;
+    }
+
+    #draw-canvas {
+      position: absolute;
+      inset: 0;
+      display: none;
+      cursor: crosshair;
+    }
 
     /* ── Overlays ── */
     .mode-badge {
       position: absolute;
-      top: 10px; left: 10px;
-      background: rgba(255,255,255,.92);
+      top: 10px;
+      left: 10px;
+      background: rgba(255, 255, 255, .92);
       border: 1px solid var(--border);
       color: var(--accent);
       font-family: var(--mono);
@@ -184,12 +287,13 @@
       pointer-events: none;
       z-index: 10;
     }
+
     .hint-bar {
       position: absolute;
       bottom: 10px;
       left: 50%;
       transform: translateX(-50%);
-      background: rgba(255,255,255,.92);
+      background: rgba(255, 255, 255, .92);
       border: 1px solid var(--border);
       color: var(--muted);
       font-family: var(--mono);
@@ -201,6 +305,7 @@
       white-space: nowrap;
       z-index: 10;
     }
+
     .phase-dots {
       position: absolute;
       top: 10px;
@@ -211,67 +316,114 @@
       z-index: 10;
       pointer-events: none;
     }
+
     .phase-dot {
-      width: 10px; height: 10px;
+      width: 10px;
+      height: 10px;
       border-radius: 50%;
       background: var(--border);
       border: 1px solid var(--muted);
       transition: all .2s;
     }
-    .phase-dot.done { background: var(--green); border-color: var(--green); }
-    .phase-dot.live { background: var(--accent); border-color: var(--accent); box-shadow: 0 0 6px rgba(49,130,206,.5); }
+
+    .phase-dot.done {
+      background: var(--green);
+      border-color: var(--green);
+    }
+
+    .phase-dot.live {
+      background: var(--accent);
+      border-color: var(--accent);
+      box-shadow: 0 0 6px rgba(49, 130, 206, .5);
+    }
+
     .loading-msg {
-      position: absolute; inset: 0;
-      display: flex; align-items: center; justify-content: center;
-      font-family: var(--mono); font-size: 12px; color: var(--muted); letter-spacing: .06em;
-      z-index: 5; pointer-events: none;
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: .06em;
+      z-index: 5;
+      pointer-events: none;
     }
 
     /* ── Annotation SVG labels ── */
-    .ann-label { opacity: 0; transition: opacity .12s; pointer-events: none; }
-    .ann-g:hover .ann-label { opacity: 1; }
+    .ann-label {
+      opacity: 0;
+      transition: opacity .12s;
+      pointer-events: none;
+    }
+
+    .ann-g:hover .ann-label {
+      opacity: 1;
+    }
 
     /* ── Modal ── */
     .modal-backdrop {
-      position: absolute; inset: 0;
-      display: none; pointer-events: none;
+      position: absolute;
+      inset: 0;
+      display: none;
+      pointer-events: none;
       z-index: 50;
     }
-    .modal-backdrop.open { display: block; }
+
+    .modal-backdrop.open {
+      display: block;
+    }
+
     .modal {
       position: absolute;
       background: var(--panel);
       border: 1px solid var(--border);
       border-radius: 6px;
       width: 320px;
-      box-shadow: 0 6px 24px rgba(0,0,0,.15), 0 1px 4px rgba(0,0,0,.08);
+      box-shadow: 0 6px 24px rgba(0, 0, 0, .15), 0 1px 4px rgba(0, 0, 0, .08);
       display: flex;
       flex-direction: column;
       pointer-events: all;
       animation: modalIn .13s ease;
     }
+
     /* caret */
     .modal::after {
       content: '';
       position: absolute;
-      bottom: -7px; left: 20px;
-      width: 12px; height: 12px;
+      bottom: -7px;
+      left: 20px;
+      width: 12px;
+      height: 12px;
       background: var(--panel);
       border-right: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
       transform: rotate(45deg);
       pointer-events: none;
     }
+
     .modal.caret-top::after {
-      bottom: auto; top: -7px;
-      border-right: none; border-bottom: none;
+      bottom: auto;
+      top: -7px;
+      border-right: none;
+      border-bottom: none;
       border-left: 1px solid var(--border);
       border-top: 1px solid var(--border);
     }
+
     @keyframes modalIn {
-      from { opacity: 0; transform: translateY(4px); }
-      to   { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(4px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
+
     .modal-hdr {
       display: flex;
       align-items: center;
@@ -279,6 +431,7 @@
       padding: 10px 14px;
       border-bottom: 1px solid var(--border);
     }
+
     .modal-id {
       font-family: var(--mono);
       font-size: 9px;
@@ -287,15 +440,33 @@
       line-height: 1.4;
       max-width: 260px;
     }
+
     .modal-close {
-      background: none; border: none;
-      color: var(--muted); font-size: 16px;
-      cursor: pointer; padding: 2px 6px;
-      border-radius: 3px; line-height: 1;
-      letter-spacing: 0; text-transform: none;
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-size: 16px;
+      cursor: pointer;
+      padding: 2px 6px;
+      border-radius: 3px;
+      line-height: 1;
+      letter-spacing: 0;
+      text-transform: none;
     }
-    .modal-close:hover { color: var(--text); background: var(--border); border: none; }
-    .modal-body { padding: 14px; display: flex; flex-direction: column; gap: 12px; }
+
+    .modal-close:hover {
+      color: var(--text);
+      background: var(--border);
+      border: none;
+    }
+
+    .modal-body {
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
     .modal-field-lbl {
       font-family: var(--mono);
       font-size: 9px;
@@ -304,6 +475,7 @@
       color: var(--muted);
       margin-bottom: 4px;
     }
+
     .modal-transcription {
       width: 100%;
       background: var(--bg);
@@ -317,7 +489,11 @@
       resize: vertical;
       min-height: 80px;
     }
-    .modal-transcription:focus { box-shadow: 0 0 0 2px rgba(49,130,206,.12); }
+
+    .modal-transcription:focus {
+      box-shadow: 0 0 0 2px rgba(49, 130, 206, .12);
+    }
+
     .modal-input {
       width: 100%;
       background: var(--bg);
@@ -329,8 +505,16 @@
       border-radius: 3px;
       outline: none;
     }
-    .modal-input:focus { border-color: var(--accent); }
-    .modal-input::placeholder, .modal-transcription::placeholder { color: var(--muted); }
+
+    .modal-input:focus {
+      border-color: var(--accent);
+    }
+
+    .modal-input::placeholder,
+    .modal-transcription::placeholder {
+      color: var(--muted);
+    }
+
     .modal-footer {
       display: flex;
       justify-content: flex-end;
@@ -338,6 +522,7 @@
       padding: 10px 14px;
       border-top: 1px solid var(--border);
     }
+
     .modal-hint {
       font-family: var(--mono);
       font-size: 9px;
@@ -348,28 +533,26 @@
     }
   </style>
 </head>
+
 <body>
 
   <header>
     <div class="logo">IIIF ✦ Annotate</div>
     <div class="url-row">
-      <input id="url-in" type="text" placeholder="IIIF info.json, manifest, or image URL…"
-             onkeydown="if(event.key==='Enter') loadSource()">
+      <input id="url-in" type="text" placeholder="IIIF info.json, manifest, or image URL…" onkeydown="if(event.key==='Enter') loadSource()">
       <button class="accent" onclick="loadSource()">Load</button>
     </div>
     <div class="rot-wrap" title="Rotate view">
       <button class="rot-step" onclick="stepMapRot(-5)">◁</button>
       <div class="rot-display">
-        <input type="range" id="map-rot" min="0" max="360" step="1" value="0"
-               oninput="setMapRot(+this.value)">
+        <input type="range" id="map-rot" min="0" max="360" step="1" value="0" oninput="setMapRot(+this.value)">
         <span id="map-rot-val" class="rot-num">0°</span>
       </div>
       <button class="rot-step" onclick="stepMapRot(5)">▷</button>
       <button class="rot-step" onclick="setMapRot(0)" title="Reset rotation">↺</button>
     </div>
     <button id="btn-invert" onclick="toggleInvert()">Invert</button>
-    <input type="file" accept=".json" id="ann-upload" style="display:none"
-           onchange="importAnnotations(event)">
+    <input type="file" accept=".json" id="ann-upload" style="display:none" onchange="importAnnotations(event)">
     <button onclick="document.getElementById('ann-upload').click()">↑ Import</button>
     <button onclick="exportJSON()">Export JSON</button>
     <button onclick="copyJSON()">Copy JSON</button>
@@ -378,15 +561,15 @@
 
   <div class="workspace">
     <div class="toolbar">
-      <button class="tool-btn active" id="tb-pan"    onclick="setTool('pan')"    title="Pan [Space]">✥</button>
-      <button class="tool-btn"        id="tb-rect"   onclick="setTool('rect')"   title="Rectangle [R]">▭</button>
-      <button class="tool-btn"        id="tb-tilted" onclick="setTool('tilted')" title="Tilted rectangle [T]">◇</button>
-      <button class="tool-btn"        id="tb-poly"   onclick="setTool('poly')"   title="Polygon [P]">⬠</button>
-      <button class="tool-btn"        id="tb-select" onclick="setTool('select')" title="Select [S]">↖</button>
+      <button class="tool-btn active" id="tb-pan" onclick="setTool('pan')" title="Pan [Space]">✥</button>
+      <button class="tool-btn" id="tb-rect" onclick="setTool('rect')" title="Rectangle [R]">▭</button>
+      <button class="tool-btn" id="tb-tilted" onclick="setTool('tilted')" title="Tilted rectangle [T]">◇</button>
+      <button class="tool-btn" id="tb-poly" onclick="setTool('poly')" title="Polygon [P]">⬠</button>
+      <button class="tool-btn" id="tb-select" onclick="setTool('select')" title="Select [S]">↖</button>
       <div class="tool-sep"></div>
-      <button class="tool-btn" onclick="doZoom(1.5)"  title="Zoom in [+]">＋</button>
+      <button class="tool-btn" onclick="doZoom(1.5)" title="Zoom in [+]">＋</button>
       <button class="tool-btn" onclick="doZoom(0.67)" title="Zoom out [−]">－</button>
-      <button class="tool-btn" onclick="fitView()"    title="Fit [F]" style="font-size:11px">⊡</button>
+      <button class="tool-btn" onclick="fitView()" title="Fit [F]" style="font-size:11px">⊡</button>
     </div>
 
     <div id="viewer-wrap">
@@ -394,7 +577,7 @@
       <svg id="ann-svg" xmlns="http://www.w3.org/2000/svg"></svg>
       <canvas id="draw-canvas"></canvas>
       <div class="mode-badge" id="mode-badge">PAN</div>
-      <div class="hint-bar"   id="hint-bar">Load a IIIF resource above</div>
+      <div class="hint-bar" id="hint-bar">Load a IIIF resource above</div>
       <div class="phase-dots" id="phase-dots" style="display:none">
         <div class="phase-dot" id="pd0"></div>
         <div class="phase-dot" id="pd1"></div>
@@ -411,18 +594,15 @@
           <div class="modal-body">
             <div>
               <div class="modal-field-lbl">Transcription</div>
-              <textarea class="modal-transcription" id="m-transcription" rows="4"
-                        placeholder="Enter transcription…"></textarea>
+              <textarea class="modal-transcription" id="m-transcription" rows="4" placeholder="Enter transcription…"></textarea>
             </div>
             <div>
               <div class="modal-field-lbl">Tags</div>
-              <input class="modal-input" id="m-tags" type="text"
-                     placeholder="comma-separated tags…">
+              <input class="modal-input" id="m-tags" type="text" placeholder="comma-separated tags…">
             </div>
             <div>
               <div class="modal-field-lbl">Notes</div>
-              <input class="modal-input" id="m-notes" type="text"
-                     placeholder="Notes or observations…">
+              <input class="modal-input" id="m-notes" type="text" placeholder="Notes or observations…">
             </div>
           </div>
           <div class="modal-footer">
@@ -451,23 +631,23 @@
     const ANN_COLOR = '#3182ce';
 
     // ── DOM refs ───────────────────────────────────────────────────────────────
-    const osdEl      = document.getElementById('osd');
-    const annSvg     = document.getElementById('ann-svg');
-    const dc         = document.getElementById('draw-canvas');
-    const dctx       = dc.getContext('2d');
-    const modeBadge  = document.getElementById('mode-badge');
-    const hintBar    = document.getElementById('hint-bar');
-    const phaseDots  = document.getElementById('phase-dots');
+    const osdEl = document.getElementById('osd');
+    const annSvg = document.getElementById('ann-svg');
+    const dc = document.getElementById('draw-canvas');
+    const dctx = dc.getContext('2d');
+    const modeBadge = document.getElementById('mode-badge');
+    const hintBar = document.getElementById('hint-bar');
+    const phaseDots = document.getElementById('phase-dots');
     const loadingMsg = document.getElementById('loading-msg');
     const viewerWrap = document.getElementById('viewer-wrap');
-    const backdrop   = document.getElementById('modal-backdrop');
-    const modal      = backdrop.querySelector('.modal');
+    const backdrop = document.getElementById('modal-backdrop');
+    const modal = backdrop.querySelector('.modal');
 
     const HINTS = {
-      pan:    'Drag to pan · Scroll or +/− to zoom · F to fit · [ ] to rotate',
-      rect:   'Drag to draw, or tap corner 1 then corner 2 · Shift+drag to pan · Esc to cancel',
+      pan: 'Drag to pan · Scroll or +/− to zoom · F to fit · [ ] to rotate',
+      rect: 'Drag to draw, or tap corner 1 then corner 2 · Shift+drag to pan · Esc to cancel',
       tilted: 'Click P1 → P2 (base) → P3 (height) · Esc to cancel · Shift+drag to pan',
-      poly:   'Click vertices · Double-click or Enter to close · Esc to cancel · Shift+drag to pan',
+      poly: 'Click vertices · Double-click or Enter to close · Esc to cancel · Shift+drag to pan',
       select: 'Click to select · Double-click to edit · Drag to move · Handles to resize · Shift+drag to pan',
     };
 
@@ -476,7 +656,7 @@
       const url = document.getElementById('url-in').value.trim();
       if (!url) return;
       loadingMsg.style.display = 'flex';
-      if (viewer) { try { viewer.destroy(); } catch(e) {} viewer = null; }
+      if (viewer) { try { viewer.destroy(); } catch (e) { } viewer = null; }
       annSvg.innerHTML = '';
       anns = []; selId = null;
 
@@ -491,9 +671,9 @@
           }
           // Try to extract first canvas image from manifest (v2 or v3)
           const imgUrl = j?.sequences?.[0]?.canvases?.[0]?.images?.[0]?.resource?.['@id']
-                      || j?.items?.[0]?.items?.[0]?.items?.[0]?.body?.id;
+            || j?.items?.[0]?.items?.[0]?.items?.[0]?.body?.id;
           if (imgUrl) { initOSD(imgUrl, true); return; }
-        } catch(e) {}
+        } catch (e) { }
       }
       initOSD(url, true);
     }
@@ -540,9 +720,9 @@
     function i2s(ix, iy) {
       const item = viewer?.world?.getItemAt(0);
       if (!item) return { x: 0, y: 0 };
-      const vp  = item.imageToViewportCoordinates(ix, iy);
+      const vp = item.imageToViewportCoordinates(ix, iy);
       const win = viewer.viewport.viewportToWindowCoordinates(vp);
-      const r   = osdEl.getBoundingClientRect();
+      const r = osdEl.getBoundingClientRect();
       return { x: win.x - r.left, y: win.y - r.top };
     }
 
@@ -550,9 +730,9 @@
     function s2i(sx, sy) {
       const item = viewer?.world?.getItemAt(0);
       if (!item) return { x: 0, y: 0 };
-      const r   = osdEl.getBoundingClientRect();
-      const vp  = viewer.viewport.windowToViewportCoordinates(
-                    new OpenSeadragon.Point(sx + r.left, sy + r.top));
+      const r = osdEl.getBoundingClientRect();
+      const vp = viewer.viewport.windowToViewportCoordinates(
+        new OpenSeadragon.Point(sx + r.left, sy + r.top));
       const img = item.viewportToImageCoordinates(vp);
       return { x: img.x, y: img.y };
     }
@@ -565,10 +745,10 @@
       const cx = s.x + s.w / 2, cy = s.y + s.h / 2;
       const hw = s.w / 2, hh = s.h / 2;
       return [
-        { x: cx - hw*cos + hh*sin, y: cy - hw*sin - hh*cos },
-        { x: cx + hw*cos + hh*sin, y: cy + hw*sin - hh*cos },
-        { x: cx + hw*cos - hh*sin, y: cy + hw*sin + hh*cos },
-        { x: cx - hw*cos - hh*sin, y: cy - hw*sin + hh*cos },
+        { x: cx - hw * cos + hh * sin, y: cy - hw * sin - hh * cos },
+        { x: cx + hw * cos + hh * sin, y: cy + hw * sin - hh * cos },
+        { x: cx + hw * cos - hh * sin, y: cy + hw * sin + hh * cos },
+        { x: cx - hw * cos - hh * sin, y: cy - hw * sin + hh * cos },
       ];
     }
 
@@ -577,10 +757,10 @@
       const cos = Math.cos(s.angle), sin = Math.sin(s.angle);
       const hw = s.w / 2, hh = s.h / 2;
       return [
-        { x: s.cx - hw*cos + hh*sin, y: s.cy - hw*sin - hh*cos },
-        { x: s.cx + hw*cos + hh*sin, y: s.cy + hw*sin - hh*cos },
-        { x: s.cx + hw*cos - hh*sin, y: s.cy + hw*sin + hh*cos },
-        { x: s.cx - hw*cos - hh*sin, y: s.cy - hw*sin + hh*cos },
+        { x: s.cx - hw * cos + hh * sin, y: s.cy - hw * sin - hh * cos },
+        { x: s.cx + hw * cos + hh * sin, y: s.cy + hw * sin - hh * cos },
+        { x: s.cx + hw * cos - hh * sin, y: s.cy + hw * sin + hh * cos },
+        { x: s.cx - hw * cos - hh * sin, y: s.cy - hw * sin + hh * cos },
       ];
     }
 
@@ -588,24 +768,24 @@
     // By mapping all 4 corners through s2i() we bake in the current viewport
     // rotation, so shapes are stable when the map is rotated later.
     function screenRectToTrect(sx1, sy1, sx2, sy2) {
-      const tl = s2i(Math.min(sx1,sx2), Math.min(sy1,sy2));
-      const tr = s2i(Math.max(sx1,sx2), Math.min(sy1,sy2));
-      const br = s2i(Math.max(sx1,sx2), Math.max(sy1,sy2));
-      const bl = s2i(Math.min(sx1,sx2), Math.max(sy1,sy2));
+      const tl = s2i(Math.min(sx1, sx2), Math.min(sy1, sy2));
+      const tr = s2i(Math.max(sx1, sx2), Math.min(sy1, sy2));
+      const br = s2i(Math.max(sx1, sx2), Math.max(sy1, sy2));
+      const bl = s2i(Math.min(sx1, sx2), Math.max(sy1, sy2));
       const cx = (tl.x + tr.x + br.x + bl.x) / 4;
       const cy = (tl.y + tr.y + br.y + bl.y) / 4;
       const edgeDx = tr.x - tl.x, edgeDy = tr.y - tl.y;
-      const w = Math.sqrt(edgeDx*edgeDx + edgeDy*edgeDy);
+      const w = Math.sqrt(edgeDx * edgeDx + edgeDy * edgeDy);
       const angle = Math.atan2(edgeDy, edgeDx);
       const hDx = bl.x - tl.x, hDy = bl.y - tl.y;
-      const h = Math.sqrt(hDx*hDx + hDy*hDy);
+      const h = Math.sqrt(hDx * hDx + hDy * hDy);
       return { type: 'trect', cx, cy, w, h, angle };
     }
 
     // ── Tool management ────────────────────────────────────────────────────────
     function setTool(t) {
       tool = t;
-      ['pan','rect','tilted','poly','select'].forEach(n =>
+      ['pan', 'rect', 'tilted', 'poly', 'select'].forEach(n =>
         document.getElementById(`tb-${n}`)?.classList.toggle('active', n === t));
       modeBadge.textContent = t.toUpperCase();
       hintBar.textContent = HINTS[t];
@@ -622,7 +802,7 @@
 
     function updateDots() {
       phaseDots.style.display = tool === 'tilted' ? 'flex' : 'none';
-      ['pd0','pd1','pd2'].forEach((id, i) => {
+      ['pd0', 'pd1', 'pd2'].forEach((id, i) => {
         document.getElementById(id).className =
           'phase-dot' + (i < phase ? ' done' : i === phase ? ' live' : '');
       });
@@ -644,19 +824,19 @@
       if (!panActive || !viewer) return;
       const dx = e.clientX - panLastX, dy = e.clientY - panLastY;
       panLastX = e.clientX; panLastY = e.clientY;
-      const vp   = viewer.viewport;
+      const vp = viewer.viewport;
       const zoom = vp.getZoom(true), cw = vp.getContainerSize().x;
-      const rad  = (vp.getRotation() || 0) * Math.PI / 180;
-      const cos  = Math.cos(rad), sin = Math.sin(rad);
+      const rad = (vp.getRotation() || 0) * Math.PI / 180;
+      const cos = Math.cos(rad), sin = Math.sin(rad);
       vp.panBy(new OpenSeadragon.Point(
-        (-dx*cos - dy*sin) / (cw * zoom),
-        (-dx*sin - dy*cos) / (cw * zoom)
+        (-dx * cos - dy * sin) / (cw * zoom),
+        (-dx * sin - dy * cos) / (cw * zoom)
       ), false);
     });
 
     window.addEventListener('mouseup', () => {
       if (panActive) { panActive = false; viewerWrap.style.cursor = ''; }
-      if (editDrag)  { saveUndo(); editDrag = null; renderAnns(); }
+      if (editDrag) { saveUndo(); editDrag = null; renderAnns(); }
     });
 
     // ── Canvas drawing events ──────────────────────────────────────────────────
@@ -678,7 +858,7 @@
           rectPhase = 0; dragging = false;
           dctx.clearRect(0, 0, dc.width, dc.height);
           hintBar.textContent = HINTS.rect;
-          if (Math.abs(sx2-sx1) > 4 && Math.abs(sy2-sy1) > 4) {
+          if (Math.abs(sx2 - sx1) > 4 && Math.abs(sy2 - sy1) > 4) {
             const shape = screenRectToTrect(sx1, sy1, sx2, sy2);
             if (shape.w > 4 && shape.h > 4) addAnn(shape);
           }
@@ -708,16 +888,16 @@
 
     dc.addEventListener('mousemove', e => {
       if (!viewer || !viewer.world.getItemAt(0) || panActive) return;
-      if (tool === 'rect'   && rectPhase === 1)   previewRect(dragStartScreen, e.offsetX, e.offsetY);
-      if (tool === 'tilted' && phase > 0)          previewTilted(e.offsetX, e.offsetY);
-      if (tool === 'poly'   && polyPts.length > 0) previewPoly(e.offsetX, e.offsetY);
+      if (tool === 'rect' && rectPhase === 1) previewRect(dragStartScreen, e.offsetX, e.offsetY);
+      if (tool === 'tilted' && phase > 0) previewTilted(e.offsetX, e.offsetY);
+      if (tool === 'poly' && polyPts.length > 0) previewPoly(e.offsetX, e.offsetY);
     });
 
     dc.addEventListener('mouseup', e => {
       if (panActive || tool !== 'rect' || !dragging) return;
       const { x: sx1, y: sy1 } = dragStartScreen;
       const sx2 = e.offsetX, sy2 = e.offsetY;
-      const dist = Math.max(Math.abs(sx2-sx1), Math.abs(sy2-sy1));
+      const dist = Math.max(Math.abs(sx2 - sx1), Math.abs(sy2 - sy1));
       if (dist > 10) {
         // Meaningful drag — finish immediately
         dragging = false; rectPhase = 0;
@@ -779,7 +959,7 @@
 
     function dot(x, y) {
       dctx.fillStyle = ANN_COLOR;
-      dctx.beginPath(); dctx.arc(x, y, 4, 0, Math.PI*2); dctx.fill();
+      dctx.beginPath(); dctx.arc(x, y, 4, 0, Math.PI * 2); dctx.fill();
     }
 
     function previewPoly(sx, sy) {
@@ -806,11 +986,11 @@
       }
       if (phase === 2) {
         const p1 = i2s(tPts[0].x, tPts[0].y), p2 = i2s(tPts[1].x, tPts[1].y);
-        const dx = p2.x-p1.x, dy = p2.y-p1.y, len = Math.sqrt(dx*dx+dy*dy);
+        const dx = p2.x - p1.x, dy = p2.y - p1.y, len = Math.sqrt(dx * dx + dy * dy);
         if (len < 1) return;
-        const px = -dy/len, py = dx/len;
-        const h = (sx-p1.x)*px + (sy-p1.y)*py;
-        const corners = [p1, p2, {x:p2.x+px*h, y:p2.y+py*h}, {x:p1.x+px*h, y:p1.y+py*h}];
+        const px = -dy / len, py = dx / len;
+        const h = (sx - p1.x) * px + (sy - p1.y) * py;
+        const corners = [p1, p2, { x: p2.x + px * h, y: p2.y + py * h }, { x: p1.x + px * h, y: p1.y + py * h }];
         dctx.fillStyle = 'rgba(49,130,206,.1)'; dctx.strokeStyle = ANN_COLOR;
         dctx.lineWidth = 1.5; dctx.setLineDash([5, 3]);
         dctx.beginPath(); dctx.moveTo(corners[0].x, corners[0].y);
@@ -827,15 +1007,15 @@
 
     function finishTilted() {
       const [p1, p2, p3] = tPts;
-      const dx = p2.x-p1.x, dy = p2.y-p1.y;
-      const w = Math.sqrt(dx*dx+dy*dy); if (w < 3) return;
+      const dx = p2.x - p1.x, dy = p2.y - p1.y;
+      const w = Math.sqrt(dx * dx + dy * dy); if (w < 3) return;
       const angle = Math.atan2(dy, dx);
-      const px = -dy/w, py = dx/w;
-      const h = (p3.x-p1.x)*px + (p3.y-p1.y)*py; if (Math.abs(h) < 3) return;
+      const px = -dy / w, py = dx / w;
+      const h = (p3.x - p1.x) * px + (p3.y - p1.y) * py; if (Math.abs(h) < 3) return;
       addAnn({
         type: 'trect',
-        cx: (p1.x+p2.x)/2 + px*h/2,
-        cy: (p1.y+p2.y)/2 + py*h/2,
+        cx: (p1.x + p2.x) / 2 + px * h / 2,
+        cy: (p1.y + p2.y) / 2 + py * h / 2,
         w, h: Math.abs(h),
         angle: angle + (h < 0 ? Math.PI : 0),
       });
@@ -846,9 +1026,9 @@
       return crypto.randomUUID
         ? crypto.randomUUID()
         : 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
-            const r = Math.random() * 16 | 0;
-            return (c === 'x' ? r : (r & 3 | 8)).toString(16);
-          });
+          const r = Math.random() * 16 | 0;
+          return (c === 'x' ? r : (r & 3 | 8)).toString(16);
+        });
     }
 
     function sourceId(url) { return url.replace(/\/info\.json$/i, ''); }
@@ -904,21 +1084,23 @@
     function shapeScreenBBox(a) {
       const s = a.shape;
       let pts;
-      if      (s.type === 'rect')  pts = rectCorners(s).map(p => i2s(p.x, p.y));
+      if (s.type === 'rect') pts = rectCorners(s).map(p => i2s(p.x, p.y));
       else if (s.type === 'trect') pts = trectCorners(s).map(p => i2s(p.x, p.y));
-      else                         pts = s.points.map(p => i2s(p.x, p.y));
+      else pts = s.points.map(p => i2s(p.x, p.y));
       const xs = pts.map(p => p.x), ys = pts.map(p => p.y);
-      return { minX: Math.min(...xs), minY: Math.min(...ys),
-               maxX: Math.max(...xs), maxY: Math.max(...ys) };
+      return {
+        minX: Math.min(...xs), minY: Math.min(...ys),
+        maxX: Math.max(...xs), maxY: Math.max(...ys)
+      };
     }
 
     function openModal(id) {
       const a = anns.find(x => x.id === id); if (!a) return;
       selId = id;
-      document.getElementById('modal-id').textContent       = a.annId || `#${a.id}`;
+      document.getElementById('modal-id').textContent = a.annId || `#${a.id}`;
       document.getElementById('m-transcription').value = a.transcription;
-      document.getElementById('m-tags').value          = a.tags;
-      document.getElementById('m-notes').value         = a.notes;
+      document.getElementById('m-tags').value = a.tags;
+      document.getElementById('m-notes').value = a.notes;
 
       // Position off-screen first so we can measure real height
       modal.classList.remove('caret-top');
@@ -957,8 +1139,8 @@
       if (selId === null) return;
       const a = anns.find(x => x.id === selId); if (!a) return;
       a.transcription = document.getElementById('m-transcription').value;
-      a.tags          = document.getElementById('m-tags').value;
-      a.notes         = document.getElementById('m-notes').value;
+      a.tags = document.getElementById('m-tags').value;
+      a.notes = document.getElementById('m-notes').value;
     }
 
     function closeModal() {
@@ -968,15 +1150,14 @@
     }
 
     // Live-sync modal fields to annotation data
-    ['m-transcription','m-tags','m-notes'].forEach(id => {
+    ['m-transcription', 'm-tags', 'm-notes'].forEach(id => {
       document.getElementById(id).addEventListener('input', syncModalToAnn);
     });
 
     document.getElementById('m-transcription').addEventListener('keydown', e => {
-      if (e.key === 'Escape' || (e.key === 'Enter' && (e.ctrlKey || e.metaKey)))
-        { e.preventDefault(); closeModal(); }
+      if (e.key === 'Escape' || (e.key === 'Enter' && (e.ctrlKey || e.metaKey))) { e.preventDefault(); closeModal(); }
     });
-    ['m-tags','m-notes'].forEach(id => {
+    ['m-tags', 'm-notes'].forEach(id => {
       document.getElementById(id).addEventListener('keydown', e => {
         if (e.key === 'Escape' || e.key === 'Enter') { e.preventDefault(); closeModal(); }
       });
@@ -996,15 +1177,15 @@
 
         // Compute screen-space corners
         let corners;
-        if      (s.type === 'rect')  corners = rectCorners(s).map(p => i2s(p.x, p.y));
+        if (s.type === 'rect') corners = rectCorners(s).map(p => i2s(p.x, p.y));
         else if (s.type === 'trect') corners = trectCorners(s).map(p => i2s(p.x, p.y));
-        else                         corners = s.points.map(p => i2s(p.x, p.y));
+        else corners = s.points.map(p => i2s(p.x, p.y));
 
         // Shape polygon
         const poly = document.createElementNS(NS, 'polygon');
         poly.setAttribute('points', corners.map(p => `${p.x},${p.y}`).join(' '));
-        poly.setAttribute('fill',         hexA(col, sel ? .22 : .1));
-        poly.setAttribute('stroke',       col);
+        poly.setAttribute('fill', hexA(col, sel ? .22 : .1));
+        poly.setAttribute('stroke', col);
         poly.setAttribute('stroke-width', sel ? 2 : 1.5);
         if (sel) poly.setAttribute('stroke-dasharray', '7 3');
         poly.style.pointerEvents = 'all';
@@ -1015,11 +1196,13 @@
           ev.stopPropagation();
           selectAnn(a.id);
           const r = osdEl.getBoundingClientRect();
-          editDrag = { type: 'move', annId: a.id,
-                       startImg: s2i(ev.clientX - r.left, ev.clientY - r.top),
-                       origShape: JSON.parse(JSON.stringify(s)) };
+          editDrag = {
+            type: 'move', annId: a.id,
+            startImg: s2i(ev.clientX - r.left, ev.clientY - r.top),
+            origShape: JSON.parse(JSON.stringify(s))
+          };
         });
-        poly.addEventListener('click',    ev => { ev.stopPropagation(); if (tool === 'select') selectAnn(a.id); });
+        poly.addEventListener('click', ev => { ev.stopPropagation(); if (tool === 'select') selectAnn(a.id); });
         poly.addEventListener('dblclick', ev => { ev.stopPropagation(); selectAnn(a.id); openModal(a.id); });
 
         // Hover label (transcription preview)
@@ -1047,24 +1230,26 @@
         // Selection handles
         if (sel && tool === 'select') {
           if (s.type === 'rect' || s.type === 'trect') {
-            const hCorners  = s.type === 'rect' ? rectCorners(s).map(p => i2s(p.x, p.y))
-                                                : trectCorners(s).map(p => i2s(p.x, p.y));
-            const dragType  = s.type === 'rect' ? 'corner' : 'trect-corner';
-            const cursors   = ['nw-resize','ne-resize','se-resize','sw-resize'];
+            const hCorners = s.type === 'rect' ? rectCorners(s).map(p => i2s(p.x, p.y))
+              : trectCorners(s).map(p => i2s(p.x, p.y));
+            const dragType = s.type === 'rect' ? 'corner' : 'trect-corner';
+            const cursors = ['nw-resize', 'ne-resize', 'se-resize', 'sw-resize'];
 
             hCorners.forEach((c, ci) => {
               const h = document.createElementNS(NS, 'rect');
               h.setAttribute('x', c.x - 5); h.setAttribute('y', c.y - 5);
-              h.setAttribute('width', 10);  h.setAttribute('height', 10);
+              h.setAttribute('width', 10); h.setAttribute('height', 10);
               h.setAttribute('fill', '#fff'); h.setAttribute('stroke', col);
               h.setAttribute('stroke-width', 1.5); h.setAttribute('rx', 2);
               h.style.cursor = cursors[ci]; h.style.pointerEvents = 'all';
               h.addEventListener('mousedown', ev => {
                 if (ev.shiftKey) return; ev.stopPropagation();
                 const r = osdEl.getBoundingClientRect();
-                editDrag = { type: dragType, annId: a.id, cornerIdx: ci,
-                             startImg: s2i(ev.clientX - r.left, ev.clientY - r.top),
-                             origShape: JSON.parse(JSON.stringify(s)) };
+                editDrag = {
+                  type: dragType, annId: a.id, cornerIdx: ci,
+                  startImg: s2i(ev.clientX - r.left, ev.clientY - r.top),
+                  origShape: JSON.parse(JSON.stringify(s))
+                };
               });
               g.appendChild(h);
             });
@@ -1072,9 +1257,9 @@
             // Rotation handle (trect only)
             if (s.type === 'trect') {
               const tr = hCorners[1], tl = hCorners[0];
-              const edx = tr.x-tl.x, edy = tr.y-tl.y;
-              const el = Math.sqrt(edx*edx+edy*edy) || 1;
-              const rhPos = { x: tr.x + (edx/el)*22, y: tr.y + (edy/el)*22 };
+              const edx = tr.x - tl.x, edy = tr.y - tl.y;
+              const el = Math.sqrt(edx * edx + edy * edy) || 1;
+              const rhPos = { x: tr.x + (edx / el) * 22, y: tr.y + (edy / el) * 22 };
 
               const ln = document.createElementNS(NS, 'line');
               ln.setAttribute('x1', tr.x); ln.setAttribute('y1', tr.y);
@@ -1090,9 +1275,11 @@
               rh.addEventListener('mousedown', ev => {
                 if (ev.shiftKey) return; ev.stopPropagation();
                 const r = osdEl.getBoundingClientRect();
-                editDrag = { type: 'trect-rotate', annId: a.id,
-                             startImg: s2i(ev.clientX - r.left, ev.clientY - r.top),
-                             origShape: JSON.parse(JSON.stringify(s)) };
+                editDrag = {
+                  type: 'trect-rotate', annId: a.id,
+                  startImg: s2i(ev.clientX - r.left, ev.clientY - r.top),
+                  origShape: JSON.parse(JSON.stringify(s))
+                };
               });
               g.appendChild(rh);
             }
@@ -1108,9 +1295,11 @@
               h.addEventListener('mousedown', ev => {
                 if (ev.shiftKey) return; ev.stopPropagation();
                 const r = osdEl.getBoundingClientRect();
-                editDrag = { type: 'vertex', annId: a.id, vertIdx: vi,
-                             startImg: s2i(ev.clientX - r.left, ev.clientY - r.top),
-                             origShape: JSON.parse(JSON.stringify(s)) };
+                editDrag = {
+                  type: 'vertex', annId: a.id, vertIdx: vi,
+                  startImg: s2i(ev.clientX - r.left, ev.clientY - r.top),
+                  origShape: JSON.parse(JSON.stringify(s))
+                };
               });
               g.appendChild(h);
             });
@@ -1133,23 +1322,23 @@
 
     annSvg.addEventListener('mousemove', e => {
       if (!editDrag || !viewer) return;
-      const r   = osdEl.getBoundingClientRect();
+      const r = osdEl.getBoundingClientRect();
       const cur = s2i(e.clientX - r.left, e.clientY - r.top);
-      const dx  = cur.x - editDrag.startImg.x, dy = cur.y - editDrag.startImg.y;
-      const a   = anns.find(x => x.id === editDrag.annId); if (!a) return;
-      const o   = editDrag.origShape;
+      const dx = cur.x - editDrag.startImg.x, dy = cur.y - editDrag.startImg.y;
+      const a = anns.find(x => x.id === editDrag.annId); if (!a) return;
+      const o = editDrag.origShape;
 
       if (editDrag.type === 'move') {
-        if      (o.type === 'rect')  { a.shape.x = o.x+dx; a.shape.y = o.y+dy; }
-        else if (o.type === 'trect') { a.shape.cx = o.cx+dx; a.shape.cy = o.cy+dy; }
-        else                         { a.shape.points = o.points.map(p => ({x:p.x+dx, y:p.y+dy})); }
+        if (o.type === 'rect') { a.shape.x = o.x + dx; a.shape.y = o.y + dy; }
+        else if (o.type === 'trect') { a.shape.cx = o.cx + dx; a.shape.cy = o.cy + dy; }
+        else { a.shape.points = o.points.map(p => ({ x: p.x + dx, y: p.y + dy })); }
 
       } else if (editDrag.type === 'corner') {
         let { x, y, w, h } = o; const ci = editDrag.cornerIdx;
-        if (ci === 0) { x=o.x+dx; y=o.y+dy; w=o.w-dx; h=o.h-dy; }
-        if (ci === 1) { y=o.y+dy; w=o.w+dx; h=o.h-dy; }
-        if (ci === 2) { w=o.w+dx; h=o.h+dy; }
-        if (ci === 3) { x=o.x+dx; w=o.w-dx; h=o.h+dy; }
+        if (ci === 0) { x = o.x + dx; y = o.y + dy; w = o.w - dx; h = o.h - dy; }
+        if (ci === 1) { y = o.y + dy; w = o.w + dx; h = o.h - dy; }
+        if (ci === 2) { w = o.w + dx; h = o.h + dy; }
+        if (ci === 3) { x = o.x + dx; w = o.w - dx; h = o.h + dy; }
         if (w > 4) { a.shape.x = x; a.shape.w = w; }
         if (h > 4) { a.shape.y = y; a.shape.h = h; }
 
@@ -1157,15 +1346,15 @@
         const ci = editDrag.cornerIdx, oppIdx = (ci + 2) % 4;
         const opp = trectCorners(o)[oppIdx];
         const cos = Math.cos(o.angle), sin = Math.sin(o.angle);
-        const relX = (cur.x-opp.x)*cos + (cur.y-opp.y)*sin;
-        const relY = -(cur.x-opp.x)*sin + (cur.y-opp.y)*cos;
+        const relX = (cur.x - opp.x) * cos + (cur.y - opp.y) * sin;
+        const relY = -(cur.x - opp.x) * sin + (cur.y - opp.y) * cos;
         const nw = Math.abs(relX), nh = Math.abs(relY);
         if (nw < 4 || nh < 4) return;
-        a.shape.cx = (opp.x+cur.x)/2; a.shape.cy = (opp.y+cur.y)/2;
+        a.shape.cx = (opp.x + cur.x) / 2; a.shape.cy = (opp.y + cur.y) / 2;
         a.shape.w = nw; a.shape.h = nh;
 
       } else if (editDrag.type === 'trect-rotate') {
-        a.shape.angle = Math.atan2(cur.y - o.cy, cur.x - o.cx) - Math.atan2(-o.h/2, o.w/2);
+        a.shape.angle = Math.atan2(cur.y - o.cy, cur.x - o.cx) - Math.atan2(-o.h / 2, o.w / 2);
 
       } else if (editDrag.type === 'vertex') {
         a.shape.points = o.points.map((p, i) => i === editDrag.vertIdx ? cur : { x: p.x, y: p.y });
@@ -1198,18 +1387,18 @@
               value: `xywh=pixel:${Math.round(s.x)},${Math.round(s.y)},${Math.round(s.w)},${Math.round(s.h)}`,
             };
           } else {
-            const corners = s.type === 'rect'  ? rectCorners(s)
-                          : s.type === 'trect' ? trectCorners(s)
-                          : s.points;
+            const corners = s.type === 'rect' ? rectCorners(s)
+              : s.type === 'trect' ? trectCorners(s)
+                : s.points;
             selector = { type: 'SvgSelector', value: `<svg><polygon points="${ptsStr(corners)}"/></svg>` };
           }
           return {
             type: 'Annotation',
             id: a.annId || `urn:uuid:${uuid()}`,
             body: [
-              ...(a.transcription ? [{ type: 'TextualBody', value: a.transcription, purpose: 'commenting'   }] : []),
-              ...(a.tags          ? [{ type: 'TextualBody', value: a.tags,          purpose: 'classifying'  }] : []),
-              ...(a.notes         ? [{ type: 'TextualBody', value: a.notes,         purpose: 'describing'   }] : []),
+              ...(a.transcription ? [{ type: 'TextualBody', value: a.transcription, purpose: 'commenting' }] : []),
+              ...(a.tags ? [{ type: 'TextualBody', value: a.tags, purpose: 'classifying' }] : []),
+              ...(a.notes ? [{ type: 'TextualBody', value: a.notes, purpose: 'describing' }] : []),
             ],
             target: { source: src, selector },
           };
@@ -1251,15 +1440,15 @@
         }
 
         const items = data.items || (data.type === 'Annotation' ? [data] : []);
-        const src   = sourceId(document.getElementById('url-in').value.trim());
-        let loaded  = 0;
+        const src = sourceId(document.getElementById('url-in').value.trim());
+        let loaded = 0;
 
         items.forEach(item => {
           const bodies = Array.isArray(item.body) ? item.body : [item.body];
-          const transcription = bodies.find(b => b.purpose === 'commenting')?.value  || '';
-          const tags          = bodies.find(b => b.purpose === 'classifying')?.value || '';
-          const notes         = bodies.find(b => b.purpose === 'describing')?.value  || '';
-          const sel           = item.target?.selector || item.target;
+          const transcription = bodies.find(b => b.purpose === 'commenting')?.value || '';
+          const tags = bodies.find(b => b.purpose === 'classifying')?.value || '';
+          const notes = bodies.find(b => b.purpose === 'describing')?.value || '';
+          const sel = item.target?.selector || item.target;
           let shape = null;
 
           if (sel?.type === 'FragmentSelector') {
@@ -1287,8 +1476,10 @@
 
           if (shape) {
             seq++;
-            anns.push({ id: seq, annId: item.id || `${src}/${uuid()}`,
-                        transcription, tags, notes, shape, color: ANN_COLOR });
+            anns.push({
+              id: seq, annId: item.id || `${src}/${uuid()}`,
+              transcription, tags, notes, shape, color: ANN_COLOR
+            });
             loaded++;
           }
         });
@@ -1296,7 +1487,7 @@
         renderAnns();
         hintBar.textContent = `✓ Imported ${loaded} annotation${loaded !== 1 ? 's' : ''}`;
         setTimeout(() => hintBar.textContent = HINTS[tool], 3000);
-      } catch(err) {
+      } catch (err) {
         hintBar.textContent = '⚠ Could not parse annotation file';
         setTimeout(() => hintBar.textContent = HINTS[tool], 3000);
       }
@@ -1305,9 +1496,9 @@
 
     // ── Utilities ──────────────────────────────────────────────────────────────
     function hexA(hex, a) {
-      const r = parseInt(hex.slice(1,3), 16);
-      const g = parseInt(hex.slice(3,5), 16);
-      const b = parseInt(hex.slice(5,7), 16);
+      const r = parseInt(hex.slice(1, 3), 16);
+      const g = parseInt(hex.slice(3, 5), 16);
+      const b = parseInt(hex.slice(5, 7), 16);
       return `rgba(${r},${g},${b},${a})`;
     }
 
@@ -1316,12 +1507,12 @@
       inverted = !inverted;
       osdEl.style.filter = inverted ? 'invert(1)' : '';
       const btn = document.getElementById('btn-invert');
-      btn.style.color       = inverted ? 'var(--accent)' : '';
+      btn.style.color = inverted ? 'var(--accent)' : '';
       btn.style.borderColor = inverted ? 'var(--accent)' : '';
     }
 
-    function doZoom(f)    { if (viewer) viewer.viewport.zoomBy(f, null, false); }
-    function fitView()    { if (viewer) viewer.viewport.goHome(false); }
+    function doZoom(f) { if (viewer) viewer.viewport.zoomBy(f, null, false); }
+    function fitView() { if (viewer) viewer.viewport.goHome(false); }
 
     function setMapRot(deg) {
       deg = ((deg % 360) + 360) % 360;
@@ -1332,6 +1523,14 @@
     }
     function stepMapRot(d) { setMapRot((viewer ? viewer.viewport.getRotation() : 0) + d); }
 
+    const params = new URLSearchParams(window.location.search);
+    const preload = params.get('iiif');
+    if (preload) {
+      document.getElementById('url-in').value = preload;
+      loadSource();
+    }
+
   </script>
 </body>
+
 </html>
